@@ -262,3 +262,102 @@ This removes a collaborator.
 <aside class="success">
 Remember — Bad Collaborators don"t make good teams!
 </aside>
+
+
+# Projects
+
+## List Projects
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"projects": projects}
+]
+```
+
+This endpoint lists your projects.
+
+### HTTP Request
+
+`GET /api/projects`
+
+<aside class="success">
+Don't forget what you scanned!
+</aside>
+
+## Get Project
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+        "project": project,
+        "files": files,
+        "analyses": analyses,
+    }
+]
+```
+
+This endpoint gets your project data by id.
+
+### HTTP Request
+
+`GET /api/projects/<project_id>`
+
+<aside class="success">
+Deep deep down lies the critical data!
+</aside>
+
+
+## Delete Project
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+        "project": project,
+        "files": files,
+        "analyses": analyses,
+  }
+]
+```
+
+This endpoint deletes your project data by id.
+
+### HTTP Request
+
+`GET /api/projects/delete/<project_id>`
+
+<aside class="success">
+We understand what we had when we lose it!
+</aside>
+
+
+## Update Project Credentials
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "project": project
+  }
+]
+```
+
+This endpoint gets your project data by id.
+
+### HTTP Request
+
+`POST /api/projects/save_credentials/<project_id>`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+testUser | NONE | Username.
+testPassword | NONE | Password.
+
+
+<aside class="success">
+
+</aside>
