@@ -29,6 +29,48 @@ This example API documentation page was created with [Slate](http://github.com/t
 
 # Authentication
 
+# Users
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"user": user}
+]
+```
+
+This endpoint gets you user object by id.
+
+### HTTP Request
+
+`GET /api/users/<user_id>`
+
+<aside class="success">
+Love thy users!
+</aside>
+
+
+# Namespace Add
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"message": "Namespace request sent successfully!"}
+]
+```
+
+This endpoint lets you add a namespace.
+
+### HTTP Request
+
+`GET /api/namespace_add`
+
+<aside class="success">
+Names divide knights from soldiers!
+</aside>
+
+
 # Init
 > The above command returns JSON structured like this:
 
@@ -69,33 +111,34 @@ This endpoint is the initial call.
 `GET /api/init`
 
 <aside class="success">
-Init tells you a lot of things!
+Init is a chatterbox!
 </aside>
 
 
-# Users
+# Manual Scan
 
 > The above command returns JSON structured like this:
 
 ```json
 [
-  {"user": user}
+  {"message": "Manual assessment is requested"}
 ]
 ```
 
-This endpoint gets you user object by id.
+This endpoint lets you request a manual scan.
 
 ### HTTP Request
 
-`GET /api/users/<user_id>`
+`GET /api/manual/<file_id>`
 
 <aside class="success">
-Love thy users!
+The root of all automation is manual
 </aside>
 
 
 # Settings
 
+## Change Password
 > The above command returns JSON structured like this:
 
 ```json
