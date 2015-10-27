@@ -28,6 +28,49 @@ This example API documentation page was created with [Slate](http://github.com/t
 
 # Authentication
 
+# Init
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+        'users': users,
+        'currentUser': user,
+        'projects': projects,
+        'collaborations': collaborations,
+        'files': files,
+        'analyses': analyses,
+        'vulnerabilities': vulnerabilities_dict,
+        'pricings': pricing,
+        'ratio': {
+            'type': 'ratio',
+            'id': 1,
+            'uuid': 1,
+            'affected': get_affected_count_for_user,
+            'unaffected': get_unaffected_count_for_user,
+        },
+        "urls": {
+            "githubRedirect": {
+                "redirect_uri": REDIRECT_BASE_URL,
+                "github_redirect": github_redirect url),
+                "github_client_id": GITHUB_CLIENT_ID,
+                "state": "state",
+            },
+        }
+    }
+]
+```
+
+This endpoint is the initial call.
+
+### HTTP Request
+
+`GET /api/init`
+
+<aside class="success">
+Init tells you a lot of things!
+</aside>
+
 
 # Settings
 > The above command returns JSON structured like this:
@@ -60,11 +103,6 @@ Changing your password is a good habit!
 
 ## Add Collaborator
 
-/api/collaboration/delete/<collaboration_id>
-
-Request Type - GET
-
-Parameters - None
 ```ruby
 require 'kittn'
 
