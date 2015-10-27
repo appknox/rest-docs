@@ -93,7 +93,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 storeURL | NONE | The url of the app in store.
 
-
 <aside class="success">
 
 </aside>
@@ -344,7 +343,7 @@ We understand what we had when we lose it!
 ]
 ```
 
-This endpoint gets your project data by id.
+This endpoint updates your project credentials.
 
 ### HTTP Request
 
@@ -360,4 +359,173 @@ testPassword | NONE | Password.
 
 <aside class="success">
 Your username and password define your uniqueness!
+</aside>
+
+# Files
+
+## Project Files
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "files": files
+  }
+]
+```
+
+This endpoint gets your project's files.
+
+### HTTP Request
+
+`GET /api/projects/<project_id>/files`
+
+<aside class="success">
+
+</aside>
+
+
+## Last Updated File
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "file": file
+  }
+]
+```
+
+This endpoint gets your project's most recent file.
+
+### HTTP Request
+
+`GET /api/projects/<project_id>/last_file`
+
+<aside class="success">
+Current Affairs!
+</aside>
+
+
+## Get File by Id
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+        "file": file,
+        "projects": project,
+        "analyses": analyses,
+        "vulnerabilities": vulnerabilities,
+    }
+]
+```
+
+This endpoint gets your file by id.
+
+### HTTP Request
+
+`GET /api/files/<file_id>`
+
+<aside class="success">
+
+</aside>
+
+
+# File Analyses
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"analyses": analyses}
+]
+```
+
+This endpoint gives you analyses for a file id.
+
+### HTTP Request
+
+`GET /api/files/<file_id>/analyses`
+
+<aside class="success">
+
+</aside>
+
+
+# Signed PDF URL
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+        "base_url": base_url,
+        "query_params": query_params,
+        "headers": headers,
+        "file_key": file_key,
+        "file_key_signed": hmac_sign,
+    }
+]
+```
+
+This endpoint generates upload url for report.
+
+### HTTP Request
+
+`GET /api/signed_pdf_url/<file_id>`
+
+<aside class="success">
+
+</aside>
+
+
+# Uploaded File
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"message": "File Uploaded successfully"}
+]
+```
+
+This endpoint provides report in specified format.
+
+### HTTP Request
+
+`GET /api/uploaded_file`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+file_key | NONE | File Key.
+file_key_signed | NONE | File Key Signed.
+
+<aside class="success">
+
+</aside>
+
+
+# Report
+> The above command returns JSON structured like this:
+
+```json
+[
+
+]
+```
+
+This endpoint provides report in specified format.
+
+### HTTP Request
+
+`GET /api/report/<file_id>`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+format | json | Specify formats in `csv`, `pdf`, `xml` or `json`.
+
+<aside class="success">
+
 </aside>
