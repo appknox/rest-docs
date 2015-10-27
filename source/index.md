@@ -359,5 +359,5 @@ testPassword | NONE | Password.
 
 
 <aside class="success">
-
+Your username and password define your uniqueness!
 </aside>
