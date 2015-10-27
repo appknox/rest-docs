@@ -7,8 +7,8 @@ language_tabs:
   - python
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href="#">Sign Up for a Developer Key</a>
+  - <a href="http://github.com/tripit/slate">Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -22,7 +22,7 @@ Welcome to the Sherlock API!
 
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API"s documentation.
 
 
 # Base API
@@ -35,20 +35,20 @@ This example API documentation page was created with [Slate](http://github.com/t
 ```json
 [
   {
-        'users': users,
-        'currentUser': user,
-        'projects': projects,
-        'collaborations': collaborations,
-        'files': files,
-        'analyses': analyses,
-        'vulnerabilities': vulnerabilities_dict,
-        'pricings': pricing,
-        'ratio': {
-            'type': 'ratio',
-            'id': 1,
-            'uuid': 1,
-            'affected': get_affected_count_for_user,
-            'unaffected': get_unaffected_count_for_user,
+        "users": users,
+        "currentUser": user,
+        "projects": projects,
+        "collaborations": collaborations,
+        "files": files,
+        "analyses": analyses,
+        "vulnerabilities": vulnerabilities_dict,
+        "pricings": pricing,
+        "ratio": {
+            "type": "ratio",
+            "id": 1,
+            "uuid": 1,
+            "affected": get_affected_count_for_user,
+            "unaffected": get_unaffected_count_for_user,
         },
         "urls": {
             "githubRedirect": {
@@ -79,7 +79,7 @@ Init tells you a lot of things!
 
 ```json
 [
-  {'user': user}
+  {"user": user}
 ]
 ```
 
@@ -100,8 +100,8 @@ Love thy users!
 
 ```json
 [
-  {'status': 'success',
-    'message': 'Password updated successfully'}
+  {"status": "success",
+    "message": "Password updated successfully"}
 ]
 ```
 
@@ -127,16 +127,16 @@ Changing your password is a good habit!
 ## Add Collaborator
 
 ```ruby
-require 'kittn'
+require "kittn"
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+api = Kittn::APIClient.authorize!("meowmeowmeow")
 api.kittens.get
 ```
 
 ```python
 import kittn
 
-api = kittn.authorize('meowmeowmeow')
+api = kittn.authorize("meowmeowmeow")
 api.kittens.get()
 ```
 
@@ -150,8 +150,8 @@ curl "http://example.com/api/kittens"
 ```json
 [
   {
-        'success': True,
-        'message': "An invitation is sent out to the user."
+        "success": True,
+        "message": "An invitation is sent out to the user."
     }
 ]
 ```
@@ -178,7 +178,7 @@ Remember — Teamwork, Teamwork, Teamwork!
 
 ```json
 [
-  {'message': 'Collaborator Removed.'}
+  {"message": "Collaborator Removed."}
 ]
 ```
 
@@ -189,5 +189,5 @@ This removes a collaborator.
 `GET /api/collaboration/delete/<collaboration_id>`
 
 <aside class="success">
-Remember — Bad Collaborators don't make good teams!
+Remember — Bad Collaborators don"t make good teams!
 </aside>
