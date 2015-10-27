@@ -71,6 +71,34 @@ Names divide knights from soldiers!
 </aside>
 
 
+# Store URL
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {"message": "success"}
+]
+```
+
+This endpoint lets you submit a url from store for an app.
+
+### HTTP Request
+
+`POST /api/store_url`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+storeURL | NONE | The url of the app in store.
+
+
+<aside class="success">
+
+</aside>
+
+
 # Init
 > The above command returns JSON structured like this:
 
