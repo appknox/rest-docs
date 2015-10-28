@@ -73,6 +73,10 @@ Names divide knights from soldiers!
 
 # Store URL
 
+```python
+client.submit_url(url)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -196,20 +200,6 @@ Changing your password is a good habit!
 
 ## Add Collaborator
 
-```ruby
-require "kittn"
-
-api = Kittn::APIClient.authorize!("meowmeowmeow")
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize("meowmeowmeow")
-api.kittens.get()
-```
-
 ```shell
 curl "http://example.com/api/kittens"
   -H "Authorization: meowmeowmeow"
@@ -266,6 +256,13 @@ Remember — Bad Collaborators don"t make good teams!
 # Projects
 
 ## List Projects
+
+```python
+
+client.project_list()
+
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -285,6 +282,13 @@ Don't forget what you scanned!
 </aside>
 
 ## Get Project
+
+```python
+
+client.project_get(project_id)
+
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -364,6 +368,10 @@ Your username and password define your uniqueness!
 # Files
 
 ## Project Files
+
+```python
+client.file_list(project_id)
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -408,6 +416,11 @@ Current Affairs!
 
 
 ## Get File by Id
+
+```python
+client.file_get(file_id)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -432,7 +445,12 @@ This endpoint gets your file by id.
 </aside>
 
 
-# File Analyses
+# Analyses
+
+```python
+client.analyses_list(file_id)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -478,7 +496,12 @@ This endpoint generates upload url for report.
 </aside>
 
 
-# Uploaded File
+# Upload File
+
+```python
+client.upload_file(file)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -506,6 +529,11 @@ file_key_signed | NONE | File Key Signed.
 
 
 # Report
+
+```python
+client.report(file_id, format_type)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
