@@ -3,12 +3,11 @@ title: Sherlock API Reference
 
 language_tabs:
   - shell
-  - ruby
   - python
 
 toc_footers:
-  - <a href="#">Sign Up for a Developer Key</a>
-  - <a href="http://github.com/tripit/slate">Documentation Powered by Slate</a>
+  - <a href="https://appknox.com" target="_blank">appknox.com</a>
+  - <a href="https://github.com/appknox/rest-docs/issues/new" target="_blank">Report bug in documentation</a>
 
 includes:
   - errors
@@ -18,60 +17,57 @@ search: true
 
 # Introduction
 
-Welcome to the Sherlock API!
+Appknox helps developers and enterprises to detect and fix security loopholes within a few minutes.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Welcome to the Sherlock API Documentation!
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API"s documentation.
+We have language bindings in Shell and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 
-# Base API
+# Base API URI
+
+If you are NOT an enterprise customer, `https://beta.appknox.com/api/` is your base URI.
+
+If you are an enterprise customer and want help with getting your base URI, please contact our support.
+
 
 # Authentication
 
-# Users
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {"user": user}
-]
-```
-
-This endpoint gets you user object by id.
+For the moment - we use authentications with username and password. We will switch to OAuth2 sooner or later.
 
 ### HTTP Request
 
-`GET /api/users/<user_id>`
+`POST /api/token/new.json`
 
-<aside class="success">
-Love thy users!
-</aside>
+### Query Parameters
 
+Parameter | Description
+--------- | -----------
+username  | Your Appknox Username
+password  | Your Appknox password
 
-# Namespace Add
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {"message": "Namespace request sent successfully!"}
-]
+```shell
+curl 'https://beta.appknox.com/api/token/new.json' \
+	--data 'username=chucknorris&password=kaboom'
 ```
 
-This endpoint lets you add a namespace.
+```python
+from appknox import AppknoxClient
+# The following line will authorize automatically
+client = AppknoxClient(username="chucknorris", password="kaboom")
+```
 
-### HTTP Request
+> Response
 
-`GET /api/namespace_add`
+```json
+{
+	"token": "12a-1234567890abcdefg",
+	"user": 1,
+	"success": true
+}
+```
 
-<aside class="success">
-Names divide knights from soldiers!
-</aside>
-
-
-# Store URL
+# Submit Store URL / Package Name
 
 ```python
 client.submit_url(url)
@@ -96,10 +92,6 @@ This endpoint lets you submit a url from store for an app.
 Parameter | Default | Description
 --------- | ------- | -----------
 storeURL | NONE | The url of the app in store.
-
-<aside class="success">
-
-</aside>
 
 
 # Init
@@ -226,6 +218,7 @@ This adds collaborator.
 
 Parameter | Default | Description
 --------- | ------- | -----------
+
 email | NONE | Email of user to be added as collaborator.
 role | NONE | role of collaborator.
 
