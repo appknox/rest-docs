@@ -1,0 +1,701 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Sherlock API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","python"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href="https://appknox.com" target="_blank">appknox.com</a></li>
+            <li><a href="https://github.com/appknox/rest-docs/issues/new" target="_blank">Report bug in documentation</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Appknox helps developers and enterprises to detect and fix security loopholes within a few minutes.</p>
+
+<p>Welcome to the Sherlock API Documentation!</p>
+
+<p>We have language bindings in Shell and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<h1 id="base-api-uri">Base API URI</h1>
+
+<p>If you are NOT an enterprise customer, <code class="prettyprint">https://beta.appknox.com/api/</code> is your base URI.</p>
+
+<p>If you are an enterprise customer and want help with getting your base URI, please contact our support.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<p>For the moment - we use authentications with username and password. We will switch to OAuth2 sooner or later.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/token/new.json</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Your Appknox Username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Your Appknox password</td>
+</tr>
+</tbody></table>
+<pre class="highlight shell"><code>curl <span class="s1">'https://beta.appknox.com/api/token/new.json'</span> <span class="se">\</span>
+    --data <span class="s1">'username=chucknorris&amp;password=kaboom'</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">from</span> <span class="nn">appknox</span> <span class="kn">import</span> <span class="n">AppknoxClient</span>
+<span class="c"># The following line will authorize automatically</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">AppknoxClient</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"chucknorris"</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">"kaboom"</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12a-1234567890abcdefg"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h1 id="submit-store-url-package-name">Submit Store URL / Package Name</h1>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">submit_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint lets you submit a url from store for an app.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/store_url</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>storeURL</td>
+<td>NONE</td>
+<td>The url of the app in store.</td>
+</tr>
+</tbody></table>
+
+<h1 id="init">Init</h1>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="err">users</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currentUser"</span><span class="p">:</span><span class="w"> </span><span class="err">user</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"projects"</span><span class="p">:</span><span class="w"> </span><span class="err">projects</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"collaborations"</span><span class="p">:</span><span class="w"> </span><span class="err">collaborations</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="err">files</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"analyses"</span><span class="p">:</span><span class="w"> </span><span class="err">analyses</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vulnerabilities"</span><span class="p">:</span><span class="w"> </span><span class="err">vulnerabilities_dict</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pricings"</span><span class="p">:</span><span class="w"> </span><span class="err">pricing</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"ratio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ratio"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"affected"</span><span class="p">:</span><span class="w"> </span><span class="err">get_affected_count_for_user</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"unaffected"</span><span class="p">:</span><span class="w"> </span><span class="err">get_unaffected_count_for_user</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"githubRedirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"redirect_uri"</span><span class="p">:</span><span class="w"> </span><span class="err">REDIRECT_BASE_URL</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"github_redirect"</span><span class="p">:</span><span class="w"> </span><span class="err">github_redirect</span><span class="w"> </span><span class="err">url)</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"github_client_id"</span><span class="p">:</span><span class="w"> </span><span class="err">GITHUB_CLIENT_ID</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"state"</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is the initial call.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/init</code></p>
+
+<aside class="success">
+Init is a chatterbox!
+</aside>
+
+<h1 id="manual-scan">Manual Scan</h1>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manual assessment is requested"</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint lets you request a manual scan.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/manual/&lt;file_id&gt;</code></p>
+
+<aside class="success">
+The root of all automation is manual
+</aside>
+
+<h1 id="settings">Settings</h1>
+
+<h2 id="change-password">Change Password</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password updated successfully"</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint changes your account password.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/change_password</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>password</td>
+<td>NONE</td>
+<td>Your current password.</td>
+</tr>
+<tr>
+<td>newPassword</td>
+<td>NONE</td>
+<td>Your new password.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Changing your password is a good habit!
+</aside>
+
+<h1 id="collaboration">Collaboration</h1>
+
+<h2 id="add-collaborator">Add Collaborator</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An invitation is sent out to the user."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This adds collaborator.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/collaboration</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>email | NONE | Email of user to be added as collaborator.
+role | NONE | role of collaborator.</p>
+
+<aside class="success">
+Remember — Teamwork, Teamwork, Teamwork!
+</aside>
+
+<h2 id="delete-collaborator">Delete Collaborator</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Collaborator Removed."</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This removes a collaborator.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/collaboration/delete/&lt;collaboration_id&gt;</code></p>
+
+<aside class="success">
+Remember — Bad Collaborators don&quot;t make good teams!
+</aside>
+
+<h1 id="projects">Projects</h1>
+
+<h2 id="list-projects">List Projects</h2>
+<pre class="highlight python"><code>
+<span class="n">client</span><span class="o">.</span><span class="n">project_list</span><span class="p">()</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"projects"</span><span class="p">:</span><span class="w"> </span><span class="err">projects</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint lists your projects.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/projects</code></p>
+
+<aside class="success">
+Don&rsquo;t forget what you scanned!
+</aside>
+
+<h2 id="get-project">Get Project</h2>
+<pre class="highlight python"><code>
+<span class="n">client</span><span class="o">.</span><span class="n">project_get</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"project"</span><span class="p">:</span><span class="w"> </span><span class="err">project</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="err">files</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"analyses"</span><span class="p">:</span><span class="w"> </span><span class="err">analyses</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gets your project data by id.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/projects/&lt;project_id&gt;</code></p>
+
+<aside class="success">
+Deep deep down lies the critical data!
+</aside>
+
+<h2 id="delete-project">Delete Project</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"project"</span><span class="p">:</span><span class="w"> </span><span class="err">project</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="err">files</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"analyses"</span><span class="p">:</span><span class="w"> </span><span class="err">analyses</span><span class="p">,</span><span class="w">
+  </span><span class="err">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint deletes your project data by id.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/projects/delete/&lt;project_id&gt;</code></p>
+
+<aside class="success">
+We understand what we had when we lose it!
+</aside>
+
+<h2 id="update-project-credentials">Update Project Credentials</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"project"</span><span class="p">:</span><span class="w"> </span><span class="err">project</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint updates your project credentials.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/projects/save_credentials/&lt;project_id&gt;</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>testUser</td>
+<td>NONE</td>
+<td>Username.</td>
+</tr>
+<tr>
+<td>testPassword</td>
+<td>NONE</td>
+<td>Password.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Your username and password define your uniqueness!
+</aside>
+
+<h1 id="files">Files</h1>
+
+<h2 id="project-files">Project Files</h2>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">file_list</span><span class="p">(</span><span class="n">project_id</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="err">files</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gets your project&rsquo;s files.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/projects/&lt;project_id&gt;/files</code></p>
+
+<aside class="success">
+
+</aside>
+
+<h2 id="last-updated-file">Last Updated File</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="err">file</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gets your project&rsquo;s most recent file.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/projects/&lt;project_id&gt;/last_file</code></p>
+
+<aside class="success">
+Current Affairs!
+</aside>
+
+<h2 id="get-file-by-id">Get File by Id</h2>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">file_get</span><span class="p">(</span><span class="n">file_id</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="err">file</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"projects"</span><span class="p">:</span><span class="w"> </span><span class="err">project</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"analyses"</span><span class="p">:</span><span class="w"> </span><span class="err">analyses</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vulnerabilities"</span><span class="p">:</span><span class="w"> </span><span class="err">vulnerabilities</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gets your file by id.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/files/&lt;file_id&gt;</code></p>
+
+<aside class="success">
+
+</aside>
+
+<h1 id="analyses">Analyses</h1>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">analyses_list</span><span class="p">(</span><span class="n">file_id</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"analyses"</span><span class="p">:</span><span class="w"> </span><span class="err">analyses</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gives you analyses for a file id.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/files/&lt;file_id&gt;/analyses</code></p>
+
+<aside class="success">
+
+</aside>
+
+<h1 id="signed-pdf-url">Signed PDF URL</h1>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"base_url"</span><span class="p">:</span><span class="w"> </span><span class="err">base_url</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"query_params"</span><span class="p">:</span><span class="w"> </span><span class="err">query_params</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"headers"</span><span class="p">:</span><span class="w"> </span><span class="err">headers</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"file_key"</span><span class="p">:</span><span class="w"> </span><span class="err">file_key</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"file_key_signed"</span><span class="p">:</span><span class="w"> </span><span class="err">hmac_sign</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint generates upload url for report.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/signed_pdf_url/&lt;file_id&gt;</code></p>
+
+<aside class="success">
+
+</aside>
+
+<h1 id="upload-file">Upload File</h1>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File Uploaded successfully"</span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint provides report in specified format.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/uploaded_file</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file_key</td>
+<td>NONE</td>
+<td>File Key.</td>
+</tr>
+<tr>
+<td>file_key_signed</td>
+<td>NONE</td>
+<td>File Key Signed.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+
+</aside>
+
+<h1 id="report">Report</h1>
+<pre class="highlight python"><code><span class="n">client</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">file_id</span><span class="p">,</span> <span class="n">format_type</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint provides report in specified format.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/report/&lt;file_id&gt;</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>format</td>
+<td>json</td>
+<td>Specify formats in <code class="prettyprint">csv</code>, <code class="prettyprint">pdf</code>, <code class="prettyprint">xml</code> or <code class="prettyprint">json</code>.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+
+</aside>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
