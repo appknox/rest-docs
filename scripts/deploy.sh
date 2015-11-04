@@ -6,5 +6,5 @@
 # Distributed under terms of the MIT license.
 #
 
-
-bundle exec rake publish
+rm -rf build
+bundle exec rake publish ALLOW_DIRTY=true
